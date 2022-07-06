@@ -1,6 +1,7 @@
 package com.blz;
 
 public class EmployeePayrollData {
+
     /*
      * variables
      */
