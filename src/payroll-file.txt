@@ -1,0 +1,3 @@
+EmployeePayrollData [employeeId=1, employeeName=Jeff Bezos, salary=100000.0]
+EmployeePayrollData [employeeId=2, employeeName=Bill Gates, salary=200000.0]
+EmployeePayrollData [employeeId=3, employeeName=Mark Zuckerberg, salary=300000.0]

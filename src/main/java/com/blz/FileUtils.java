@@ -3,6 +3,7 @@ package com.blz;
 import java.io.File;
 
 public class FileUtils {
+
     /**
      * created method deleteFiles to delete a File that has created
      *
