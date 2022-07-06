@@ -12,7 +12,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class NIOFileAPITest {
-
     /**
      * private variables can only be accessed within the same class (an outside
      * class has no access to it) private = restricted access However, it is
@@ -74,5 +73,16 @@ public class NIOFileAPITest {
         System.out.println("Files.newDirectory with temp");
         Files.newDirectoryStream(playPath, path -> path.toFile().isFile() && path.toString().contains("temp"))
                 .forEach(System.out::println);
+    }
+    /**
+     * created method for watch the Directory a given directory is watched Lists all
+     * the activities
+     *
+     * @throws IOException
+     */
+    public void givenADirectoryWhenWatchedListsAllTheActivities() throws IOException {
+        Path dir = Paths.get(HOME + "/" + PLAY_WITH_NIO);
+        Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
+        new Java8WatchService(dir).processEvents();
     }
 }
