@@ -18,14 +18,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.nio.file.attribute.BasicFileAttributes;
-
 public class EmployeePayrollService {
+
     /**
      * Java Enums can be thought of as classes which have a fixed set of constants
      * (a variable that does not change) we can define an enum either inside the
      * class or outside the class
      *
-     * @author user -shard
+     * @author user -Shardul
      *
      */
     public enum IOService {
@@ -35,7 +35,7 @@ public class EmployeePayrollService {
     /**
      * creating List of EmployeePayrollData
      */
-    private List<EmployeePayrollData> employeePayrollList;
+    public List<EmployeePayrollData> employeePayrollList;
 
     /**
      * creating constructor of EmployeePayrollService() which is default type
@@ -59,6 +59,7 @@ public class EmployeePayrollService {
      * @param args - Default Java param (Not used)
      */
     public static void main(String[] args) {
+
         /**
          * creating List of Type EmployeePayrollData using ArrayList to store all the
          * employeePayrolldata
@@ -66,7 +67,7 @@ public class EmployeePayrollService {
         List<EmployeePayrollData> employeePayrollList = new ArrayList<EmployeePayrollData>();
 
         /**
-         * creating instance of EmployeePayrollData class
+         * creating instance of EmployeePayrollService class
          */
         EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
 
@@ -83,13 +84,13 @@ public class EmployeePayrollService {
         /**
          * Calling method writeEmployeePayrollData to write the data
          */
-        employeePayrollService.writeEmployeeData();
+        employeePayrollService.writeEmployeeData(IOService.CONSOLE_IO);
     }
 
     /**
      * @param consoleInputReader Read employee data
      */
-    private void readEmployeeData(Scanner consoleInputReader) {
+    public void readEmployeeData(Scanner consoleInputReader) {
         System.out.println("Enter employee ID : ");
         int id = Integer.parseInt(consoleInputReader.nextLine());
         System.out.println("Enter employee name : ");
@@ -107,7 +108,32 @@ public class EmployeePayrollService {
      * created method writeEmployeeData which writes the data of the employee in the
      * console
      */
-    private void writeEmployeeData() {
-        System.out.println("Writing Employee Payroll Data to Console\n" + employeePayrollList);
+    public void writeEmployeeData(IOService ioService) {
+        if (ioService.equals(IOService.CONSOLE_IO))
+            System.out.println("Writing Employee Payroll Data to Console\n" + employeePayrollList);
+        else if (ioService.equals(IOService.FILE_IO))
+            new EmployeePayrollFileIOService().writeData(employeePayrollList);
+    }
+
+    /**
+     * created method printData to print the employee payroll data Using FileIO
+     * prints lines in the payroll file
+     *
+     * @param ioService Print Data
+     */
+    public void printData(IOService ioService) {
+        new EmployeePayrollFileIOService().printData();
+    }
+
+    /**
+     * create method countEntries -Using File IO Count Number of Entries in the File
+     *
+     * @param ioService
+     * @return number of entries
+     */
+    public long countEntries(IOService ioService) {
+        if (ioService.equals(IOService.FILE_IO))
+            return new EmployeePayrollFileIOService().countEntries();
+        return 0;
     }
 }
